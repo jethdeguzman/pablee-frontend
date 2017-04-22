@@ -1,0 +1,15 @@
+extends ../layout
+
+block content
+  h1 Product List
+  if products.length > 0
+    each product in products
+      div
+        h4= product.title
+          small= product.price
+        p= product.description
+        img(src= product.imageUrl)
+  else
+    p No Products at the moment
+    a(href='/merchant/products/sync') Sync Products
+ 
