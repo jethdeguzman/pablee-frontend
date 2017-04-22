@@ -4,12 +4,31 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var config = require('config');
+var passport = require('passport');
+var FacebookStrategy = require('passport-facebook').Strategy;
 
-var index = require('./routes/index');
-var users = require('./routes/users');
+passport.use(new FacebookStrategy({
+    clientID: config.get('Facebook.appId'),
+    clientSecret: config.get('Facebook.appSecret'),
+    callbackURL: config.get('Facebook.callbackUrl'),
+    profileFields: ['id', 'displayName', 'name', 'photos']
+  },
+  function(accessToken, refreshToken, profile, cb) {
+    //TODO: Save user
+    return cb(null, profile);
+  }
+));
+
+passport.serializeUser(function(user, cb) {
+  cb(null, user);
+});
+
+passport.deserializeUser(function(obj, cb) {
+  cb(null, obj);
+});
 
 var app = express();
-
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
@@ -20,10 +39,16 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
+app.use(require('express-session')({ secret: 'keyboard cat', resave: true, saveUninitialized: true }));
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', index);
-app.use('/users', users);
+//Initialize Passport
+app.use(passport.initialize());
+app.use(passport.session());
+
+app.use('/auth', require('./routes/auth'));
+app.use('/login', require('./routes/login'))
+app.use('/', require('./routes/index'));
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
