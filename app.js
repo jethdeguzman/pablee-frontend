@@ -34,7 +34,7 @@ passport.use(new FacebookStrategy({
     profileFields: ['id', 'displayName', 'name', 'photos', 'email']
   },
   function(accessToken, refreshToken, profile, cb) {
-    User.findOne({ facebook: {id: profile.id} }).then(function(user) {
+    User.findOne({ 'facebook.id': profile.id }).then(function(user) {
       if(!user) {
         var data = {
           name: profile.displayName,

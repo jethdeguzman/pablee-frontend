@@ -22,7 +22,7 @@ router.get('/', function (request, response, next) {
     callbackURL: config.get('Shopify.callbackUrl'),
     shop: request.query.shop
   }, function (accessToken, refreshToken, profile, cb) {
-    User.findOne({ shopify: {id: profile.id } }).then(function(user) {
+    User.findOne({ 'shopify.id': profile.id }).then(function(user) {
       if(!user) {
         var data = {
           name: profile.displayName,
