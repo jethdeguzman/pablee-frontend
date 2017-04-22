@@ -1,8 +1,22 @@
-body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+.spacer {
+  height: 100px;
 }
 
-a {
-  color: #00B7FF;
+.or{
+  margin: 100px 0px;
+  font-size: 24px;
+}
+
+.account-desc {
+  font-size: 26px;
+  margin-top:20px;
+}
+
+.short-desc {
+  margin-top: 14px;
+  font-size: 16px;
+}
+
+.account-icon {
+  width: 140px;
 }

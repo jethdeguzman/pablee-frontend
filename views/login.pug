@@ -1,7 +1,53 @@
 extends layout
 
 block content
-  a(href='/auth/facebook') Facebook login
-  br
-  a(href='/auth/shopify?shop=jethshop') Shopify login
+  .navbar.navbar-default.navbar-fixed-top
+    .container
+      .navbar-header
+        a.navbar-brand(href='../') Pablee
+        button.navbar-toggle(type='button', data-toggle='collapse', data-target='#navbar-main')
+          span.icon-bar
+          span.icon-bar
+          span.icon-bar
 
+  .spacer
+
+  .container
+    section#intro.intro-section
+      .container
+        .row
+          .col-md-12
+            hgroup.text-center
+              h1 Let's get started!
+        .spacer
+        .row
+          .col-md-12.text-center
+            .col-md-5
+              .flip
+                #customer-card.card
+                  .face.front
+                    .text-muted
+                      div
+                        img.account-icon(src='/images/shopper.svg')
+                      .account-desc I'm looking to buy or help deliver products overseas. 
+                    p.short-desc
+                      | Shop through our wide variety of products. 
+                      br
+                      |  Or you can help other shoppers to earn while travelling.
+                    hr
+                    a.btn.btn-info.btn-block.flip-btn(href='/auth/facebook') Login via Facebook
+            .col-md-2.or OR
+            .col-md-5
+              .flip
+                #merchant-card.card
+                  .face.front
+                    .text-muted
+                      div
+                        img.account-icon(src='/images/merchant.svg')
+                      .account-desc I'm looking to sell my products and discover new customers
+                    p.short-desc
+                      | Sync your products from your favorite ecommerce platform 
+                      br
+                      | Discover where your products can reach.
+                    hr
+                    a.btn.btn-success.btn-block.flip-btn(href='/auth/shopify?shop=jethshop') Login via Shopify
