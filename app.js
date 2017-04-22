@@ -10,6 +10,8 @@ var passport = require('passport');
 var FacebookStrategy = require('passport-facebook').Strategy;
 var ShopifyStrategy = require('passport-shopify').Strategy;
 var User = require('./models/user');
+var middlewares = require('./middlewares');
+
 //Mongoose config
 mongoose.connect(config.get('MongoDB.connectionString'));
 mongoose.Promise = require('bluebird');
@@ -75,10 +77,11 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.use('/auth', require('./routes/auth'));
 app.use('/login', require('./routes/login'));
-app.use('/shop', require('./routes/shop'));
-app.use('/merchant', require('./routes/merchant'));
+app.use('/auth', require('./routes/auth'));
+
+app.use('/shop', middlewares.isLoggedIn, require('./routes/shop'));
+app.use('/merchant', middlewares.isLoggedIn, require('./routes/merchant'));
 app.use('/', require('./routes/index'));
 
 // catch 404 and forward to error handler
