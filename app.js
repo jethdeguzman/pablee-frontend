@@ -80,6 +80,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 app.use('/login', require('./routes/login'));
+app.use('/logout', require('./routes/logout'));
 app.use('/auth', require('./routes/auth'));
 
 app.use('/shop', middlewares.isLoggedIn, require('./routes/shop'));
