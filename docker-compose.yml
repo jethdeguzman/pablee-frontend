@@ -1,0 +1,20 @@
+version: '2'
+
+services:
+  app:
+    build: .
+    command: npm start
+    volumes:
+      - .:/app
+    ports:
+      - 3000:3000
+    links:
+      - pablee-db
+    environment:
+      - NODE_ENV=development
+
+  pablee-db:
+    image: mongo:3.3
+    ports: 
+      - 27017
+
