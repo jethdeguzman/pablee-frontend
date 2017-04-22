@@ -6,5 +6,10 @@
   },
   "MongoDB": {
     "connectionString" : "mongodb://pablee-db/pablee"
+  },
+  "Shopify": {
+    "clientId": "a40ceba90369537bf8c3a7647976b27b",
+    "clientSecret": "48865a17233c74539cf21c55ce94aea4",
+    "callbackUrl": "http://localhost:3000/auth/shopify/callback"
   }
 }
