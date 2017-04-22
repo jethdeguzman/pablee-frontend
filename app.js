@@ -8,6 +8,7 @@ var config = require('config');
 var mongoose = require('mongoose');
 var passport = require('passport');
 var FacebookStrategy = require('passport-facebook').Strategy;
+var ShopifyStrategy = require('passport-shopify').Strategy;
 var User = require('./models/user');
 //Mongoose config
 mongoose.connect(config.get('MongoDB.connectionString'));
@@ -31,13 +32,16 @@ passport.use(new FacebookStrategy({
     profileFields: ['id', 'displayName', 'name', 'photos', 'email']
   },
   function(accessToken, refreshToken, profile, cb) {
-    User.findOne({ facebookId: profile.id }).then(function(user) {
+    User.findOne({ facebook: {id: profile.id} }).then(function(user) {
       if(!user) {
         var data = {
           name: profile.displayName,
-          facebookId: profile.id,
           type: 'CUSTOMER',
-          facebookProfilePic: profile.photos[0].value
+          facebook:  {
+            id: profile.id,
+            accessToken: accessToken,
+            profilePicture: profile.photos[0].value
+          }
         }
 
         User(data).save().then(function(user) {
@@ -74,6 +78,7 @@ app.use(passport.session());
 app.use('/auth', require('./routes/auth'));
 app.use('/login', require('./routes/login'));
 app.use('/shop', require('./routes/shop'));
+app.use('/merchant', require('./routes/merchant'));
 app.use('/', require('./routes/index'));
 
 // catch 404 and forward to error handler

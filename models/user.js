@@ -12,8 +12,19 @@ var userSchema = new mongoose.Schema(
       type: String,
       enum: ['CUSTOMER', 'MERCHANT']
     },
-    facebookId: String,
-    facebookProfilePic: String
+    facebook: {
+      id: String,
+      accessToken: String,
+      profilePicture: String  
+    },
+    shopify: {
+      id: String,
+      accessToken: String,
+      shop: {
+        name: String,
+        country: String
+      }
+    }
   },
   {
     timestamps: true
