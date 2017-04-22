@@ -11,7 +11,7 @@ router.get('/callback',
   }, 
   function (request, response) {
     passport.unuse('shopify');
-    return response.redirect('/merchant');
+    return response.redirect('/merchant/products');
   }
 );
 
@@ -21,8 +21,8 @@ router.get('/', function (request, response, next) {
     clientSecret: config.get('Shopify.clientSecret'),
     callbackURL: config.get('Shopify.callbackUrl'),
     shop: request.query.shop
-  }, function (accessToken, refreshToken, profile, done) {
-    User.findOne({ shopifyId: profile.id }).then(function(user) {
+  }, function (accessToken, refreshToken, profile, cb) {
+    User.findOne({ shopify: {id: profile.id } }).then(function(user) {
       if(!user) {
         var data = {
           name: profile.displayName,
@@ -48,7 +48,6 @@ router.get('/', function (request, response, next) {
       }
     });
 
-    done(null, profile);
   }));
   
   return passport.authenticate('shopify', {
