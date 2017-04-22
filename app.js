@@ -72,6 +72,8 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(require('express-session')({ secret: 'keyboard cat', resave: true, saveUninitialized: true }));
 app.use(express.static(path.join(__dirname, 'public')));
+app.use('/bower_components',  express.static(path.join(__dirname, '/bower_components')));
+
 
 //Initialize Passport
 app.use(passport.initialize());

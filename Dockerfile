@@ -4,6 +4,10 @@ FROM node:7.1
 RUN mkdir -p /app
 WORKDIR /app
 
+RUN npm install -g bower
+COPY bower.json /app/
+RUN bower install --allow-root
+
 COPY package.json /app/
 RUN npm install
 
