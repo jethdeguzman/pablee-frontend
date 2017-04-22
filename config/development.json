@@ -1,0 +1,7 @@
+{
+  "Facebook": {
+    "appId": "202189473620473",
+    "appSecret": "b8068834a0adff58d0cf240f66aaa7d4",
+    "callbackUrl": "http://localhost:3000/auth/facebook/callback"
+  }
+}
