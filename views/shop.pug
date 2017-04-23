@@ -168,15 +168,14 @@ block content
                     span.pe-7s-cart
                     = ' Sold by ' + product.merchant.shopify.shop.name
                 h5.pull-right
-                  span.pe-7s-map-marker
-                  = product.merchant.shopify.shop.country
-              img(src= product.imageUrl, alt= product.title, style='width:310px;')
+                  img.profile-pic(src= 'https://lipis.github.io/flag-icon-css/flags/4x3/' + product.merchant.shopify.shop.country.toLowerCase() + '.svg')
+              img(src= product.imageUrl, alt= product.title, style='')
               .caption
                 h4.pull-right= '$' + product.price
                 h4
                   a(href='#')= product.title
                 p!= product.description
-              a.btn.btn-primary.btn-block(href='/request/'+product.id) Request Item
+              a.btn.btn-primary.btn-block(href='/request/'+product._id) Request Item
 
   else
     .container

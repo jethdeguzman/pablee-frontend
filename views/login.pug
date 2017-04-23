@@ -50,4 +50,9 @@ block content
                       br
                       | Discover where your products can reach.
                     hr
-                    a.btn.btn-success.btn-block.flip-btn(href='/auth/shopify?shop=kultura-ng-pilipinas') Login via Shopify
+                    form(role='search', method='get', action='/auth/shopify')
+                      .input-group.input-group-md
+                        input.form-control(type='text', placeholder='Store Name', name='shop', required)
+                        .input-group-btn
+                          button.btn.btn-success(type='submit') Login via Shopify
+                          

@@ -83,6 +83,7 @@ app.use('/login', require('./routes/login'));
 app.use('/logout', require('./routes/logout'));
 app.use('/auth', require('./routes/auth'));
 
+app.use('/travel', middlewares.isLoggedIn, require('./routes/travel'));
 app.use('/request', middlewares.isLoggedIn, require('./routes/request'));
 app.use('/shop', middlewares.isLoggedIn, require('./routes/shop'));
 app.use('/merchant', middlewares.isLoggedIn, require('./routes/merchant'));
