@@ -1,0 +1,32 @@
+extends layout
+
+block content
+  include navbar.pug
+
+  br
+  br
+  br
+
+  if prodRequests.length > 0
+    .container
+      .row
+        each request in prodRequests
+          .col-md-4
+            .thumbnail
+              div.clearfix(style='background: #fff; padding: 5px 10px; border-bottom:1px solid #ddd')
+                h5.pull-left
+                  img.profile-pic(src= request.user.facebook.profilePicture)
+                  = request.user.name
+                h5.pull-right
+                  img.profile-pic(src= 'https://lipis.github.io/flag-icon-css/flags/4x3/' + request.deliver_to.toLowerCase() + '.svg')
+              img(src= request.image_url, alt= request.title, style='')
+              .caption
+                h4.pull-right= '$' + request.price
+                h4
+                  a(href='#')= request.title
+                p!= request.description
+              a.btn.btn-primary.btn-block(href='/offer/'+request.id)= 'Earn $' + request.reward 
+
+  else
+    .container
+       h3 No product requests at the moment.

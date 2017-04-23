@@ -5,7 +5,7 @@ var requests = require('request');
 
 router.get('/:productId', function(request, response) {
   request.user = request.session.facebook
-  Product.findOne({id: request.param.productId}).populate('merchant').then(function(product) {
+  Product.findOne({_id: request.params.productId}).populate('merchant').then(function(product) {
     return response.render('request', {user: request.user, product: product});
   });
 });
@@ -35,8 +35,8 @@ router.post('/', function(request, response) {
     json: true
   }
 
-  requests(options, function(error, response, body) {
-    if(!error && response.statusCode == 201){
+  requests(options, function(error, resp, body) {
+    if(!error && resp.statusCode == 201){
       return response.redirect('/shop');
     }
   });
