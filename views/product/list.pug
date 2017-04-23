@@ -2,14 +2,19 @@ extends ../layout
 
 block content
   h1 Product List
+    a.btn.btn-primary(href='/merchant/products/sync') Sync Products
+  br
+  br
+  br
   if products.length > 0
     each product in products
-      div
-        h4= product.title
-          small= product.price
-        p= product.description
-        img(src= product.imageUrl)
+      .col-md-4
+        .thumbnail.clearfix
+          img(src= product.imageUrl, alt= product.title)
+          .caption
+            h4.pull-right= '$' + product.price
+            h4
+              a(href='#')= product.title
+            p!= product.description
   else
     p No Products at the moment
-    a(href='/merchant/products/sync') Sync Products
- 
