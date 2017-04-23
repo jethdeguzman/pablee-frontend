@@ -10,11 +10,19 @@ services:
       - 3000:3000
     links:
       - pablee-db
+    external_links:
+      - pableeapi_app_1:pablee-api
     environment:
       - NODE_ENV=development
+    networks:
+      - default
+      - pableeapi_default
 
   pablee-db:
     image: mongo:3.3
     ports: 
       - 27017
 
+networks:
+  pableeapi_default:
+    external: true

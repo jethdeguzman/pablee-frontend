@@ -11,30 +11,31 @@ block content
         legend Request an Item
         hr
         br
+        input.form-control(type='hidden', placeholder='Desc', name='description', value= product.description)
         .form-group
           label.col-lg-2.control-label() Title
           .col-lg-10
-            input#inputEmail.form-control(type='text', placeholder='Title', value= product.title)
+            input#inputEmail.form-control(type='text', name='title', placeholder='Title', value= product.title)
         .form-group
           label.col-lg-2.control-label() Image Link
           .col-lg-10
-            input.form-control(type='text', placeholder='Image Link', value= product.imageUrl)
+            input.form-control(type='text', name='imageUrl', placeholder='Image Link', value= product.imageUrl)
         .form-group
           label.col-lg-2.control-label(for='textArea') Price
           .col-lg-10
             .input-group
               span#basic-addon1.input-group-addon USD
-              input.form-control(type='number', placeholder='Price', value= product.price)
+              input.form-control(type='number', name='price', placeholder='Price', value= product.price)
         .form-group
           label.col-lg-2.control-label(for='textArea') Reward
           .col-lg-10
             .input-group
               span#basic-addon1.input-group-addon USD
-              input.form-control(type='number', placeholder='Reward')
+              input.form-control(type='number', name='reward', placeholder='Reward', required)
         .form-group
           label.col-lg-2.control-label(for='select') Deliver From
           .col-lg-10
-            select#select.form-control
+            select#select.form-control(name='deliverFrom')
               option(value='PH', selected= product.merchant.shopify.shop.country == 'PH') Philippines
               option(value='VN', selected= product.merchant.shopify.shop.country == 'VN') Vietnam
               option(value='CN', selected= product.merchant.shopify.shop.country == 'CN') China
@@ -44,7 +45,7 @@ block content
         .form-group
           label.col-lg-2.control-label(for='select') Deliver To
           .col-lg-10
-            select#select.form-control
+            select#select.form-control(name='deliverTo')
               option(value='PH') Philippines
               option(value='VN') Vietnam
               option(value='VN') China
