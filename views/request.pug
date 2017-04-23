@@ -1,0 +1,56 @@
+extends layout
+
+block content
+  include navbar.pug
+  
+  .spacer
+
+  .container
+    form.form-horizontal(method='post', action='/request')
+      fieldset
+        legend Request an Item
+        hr
+        br
+        .form-group
+          label.col-lg-2.control-label() Title
+          .col-lg-10
+            input#inputEmail.form-control(type='text', placeholder='Title', value= product.title)
+        .form-group
+          label.col-lg-2.control-label() Image Link
+          .col-lg-10
+            input.form-control(type='text', placeholder='Image Link', value= product.imageUrl)
+        .form-group
+          label.col-lg-2.control-label(for='textArea') Price
+          .col-lg-10
+            .input-group
+              span#basic-addon1.input-group-addon USD
+              input.form-control(type='number', placeholder='Price', value= product.price)
+        .form-group
+          label.col-lg-2.control-label(for='textArea') Reward
+          .col-lg-10
+            .input-group
+              span#basic-addon1.input-group-addon USD
+              input.form-control(type='number', placeholder='Reward')
+        .form-group
+          label.col-lg-2.control-label(for='select') Deliver From
+          .col-lg-10
+            select#select.form-control
+              option(value='PH', selected= product.merchant.shopify.shop.country == 'PH') Philippines
+              option(value='VN', selected= product.merchant.shopify.shop.country == 'VN') Vietnam
+              option(value='CN', selected= product.merchant.shopify.shop.country == 'CN') China
+              option(value='MY', selected= product.merchant.shopify.shop.country == 'MY') Malaysia
+              option(value='JP', selected= product.merchant.shopify.shop.country == 'JP') Japan
+              option(value='TH', selected= product.merchant.shopify.shop.country == 'TH') Thailand
+        .form-group
+          label.col-lg-2.control-label(for='select') Deliver To
+          .col-lg-10
+            select#select.form-control
+              option(value='PH') Philippines
+              option(value='VN') Vietnam
+              option(value='VN') China
+              option(value='MY') Malaysia
+              option(value='JP') Japan
+        .form-group
+          .col-lg-10.col-lg-offset-2
+            a.btn.btn-default(href='/shop', style='margin-right:10px;') Back
+            button.btn.btn-primary(type='submit') Submit

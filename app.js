@@ -68,7 +68,7 @@ app.set('view engine', 'pug');
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(require('express-session')({ secret: 'keyboard cat', resave: true, saveUninitialized: true }));
 app.use(express.static(path.join(__dirname, 'public')));
@@ -83,6 +83,7 @@ app.use('/login', require('./routes/login'));
 app.use('/logout', require('./routes/logout'));
 app.use('/auth', require('./routes/auth'));
 
+app.use('/request', middlewares.isLoggedIn, require('./routes/request'));
 app.use('/shop', middlewares.isLoggedIn, require('./routes/shop'));
 app.use('/merchant', middlewares.isLoggedIn, require('./routes/merchant'));
 app.use('/', require('./routes/index'));
