@@ -10,6 +10,7 @@ router.get('/callback',
     return passport.authenticate('shopify', { failureRedirect: '/'})(request, response, next);
   }, 
   function (request, response) {
+    request.session["shopify"] = request.session["passport"]["user"];
     passport.unuse('shopify');
     return response.redirect('/merchant/products');
   }
