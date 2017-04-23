@@ -3,10 +3,6 @@ const uuidV4 = require('uuid/v4')
 
 var productSchema = new mongoose.Schema(
   {
-    uuid: {
-      type: String,
-      index: { unique: true }
-    },
     shopifyId: String,
     title: String,
     description: String, 
@@ -18,13 +14,5 @@ var productSchema = new mongoose.Schema(
     timestamps: true
   }
 )
-
-productSchema.pre('save', function(next) {
-  if (!this.uuid) {
-    this.uuid = uuidV4()
-  }
-
-  next()
-})
 
 module.exports = mongoose.model('Product', productSchema);
