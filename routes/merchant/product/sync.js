@@ -11,18 +11,22 @@ var shopifyConfig = {
 }
 
 router.get('/', function(request, response) {
-  shopifyConfig.shop = request.user.shopify.shop.name;
+  request.user = request.session.shopify
+  var shopName = request.user.shopify.shop.name.toLowerCase();
+  shopifyConfig.shop = shopName.replace(/\s/g , "-")
   shopifyConfig.access_token = request.user.shopify.accessToken;
 
   var Shopify = new shopifyAPI(shopifyConfig);
-  
+                                                                                                               
   Shopify.get('/admin/products.json', {}, function(err, data, headers){
     if(err) {
+      console.log(err);
       return response.redirect('/merchant/products');
     }
-
-    for (index in data.products) {
-      var product = data.products[index];
+    
+    var products = JSON.parse(JSON.stringify(data.products));
+    for (index in products) {
+      var product = products[index];
       var data = {
         shopifyId: product.id,
         title: product.title,
